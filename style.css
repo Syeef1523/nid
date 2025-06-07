@@ -1,0 +1,120 @@
+:root {    --black: #000000;
+    --dark-green: #0a1a0a;
+    --matrix-green: #00ff41;
+    --light-green: #a7ffb5;
+    --grey: #888;
+    --red: #ff5f56;
+    --yellow: #ffbd2e;
+    --green: #27c93f;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--matrix-green);
+    font-family: 'IBM Plex Mono', monospace; /* Updated Font */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    font-size: 18px;
+    line-height: 1.6;
+    /* Font clarity enhancements */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* --- Effects & Main Container --- */
+@keyframes scanline { 0% { transform: translateY(-10px); } 100% { transform: translateY(10px); } }
+.scanline {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+    background-size: 100% 4px; opacity: 0.2; pointer-events: none; animation: scanline 0.2s linear infinite;
+}
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.6); } 50% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.8); } }
+
+.container {
+    width: 100%; max-width: 650px; border: 2px solid var(--matrix-green); border-radius: 8px;
+    background: rgba(10, 26, 10, 0.85); backdrop-filter: blur(8px);
+    overflow: hidden; position: relative; animation: pulseGlow 5s ease-in-out infinite;
+}
+
+/* --- Header & Terminal UI --- */
+.header-title { background-color: var(--matrix-green); color: var(--black); text-align: center; padding: 12px; font-size: 1.6em; font-weight: 700; letter-spacing: 5px; }
+.telegram-link { text-decoration: none; color: var(--black); }
+.terminal-header { background: #333; padding: 8px; border-radius: 5px 5px 0 0; display: flex; align-items: center; }
+.terminal-buttons { display: flex; }
+.button { height: 12px; width: 12px; border-radius: 50%; margin-right: 8px; }
+.button.red { background-color: var(--red); }
+.button.yellow { background-color: var(--yellow); }
+.button.green { background-color: var(--green); }
+.terminal-title { min-height: 24px; color: #eee; font-weight: bold; flex-grow: 1; text-align: center;}
+.terminal-title .cursor { display: inline-block; background-color: var(--light-green); margin-left: 3px; animation: blink 1s step-end infinite; }
+@keyframes blink { from, to { background-color: transparent } 50% { background-color: var(--light-green); } }
+.terminal-body { background: var(--dark-green); padding: 25px; border: 1px solid #333; border-top: none; border-radius: 0 0 5px 5px; }
+
+/* --- Form Elements --- */
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 10px; font-size: 1.2em; font-weight: 700; }
+.prompt { margin-right: 10px; }
+
+input[type="text"], input[type="date"] {
+    width: 100%; background-color: var(--black); border: 2px solid var(--matrix-green); color: var(--light-green);
+    padding: 14px; font-family: inherit; font-size: 1.1em; font-weight: 700; border-radius: 4px;
+    box-sizing: border-box; transition: all 0.3s ease-in-out; letter-spacing: 1px;
+}
+input:focus { outline: none; border-color: var(--light-green); box-shadow: 0 0 15px var(--light-green); }
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) brightness(0.8) sepia(1) hue-rotate(90deg); cursor: pointer; }
+
+.validation-msg { font-size: 0.9em; padding-top: 5px; display: block; height: 1em; }
+.validation-msg.error { color: var(--red); }
+.validation-msg.success { color: var(--green); }
+
+.form-buttons { display: flex; gap: 15px; }
+.execute-button, .clear-button { flex: 1; border: none; padding: 14px; font-family: inherit; font-size: 1.2em; font-weight: 700; letter-spacing: 2px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; }
+.execute-button { background-color: var(--matrix-green); color: var(--black); }
+.clear-button { background-color: var(--grey); color: var(--black); }
+.execute-button:hover:not(:disabled) { background-color: var(--light-green); box-shadow: 0 0 20px var(--light-green); transform: scale(1.02); }
+.clear-button:hover { background-color: #aaa; }
+.execute-button:disabled { cursor: not-allowed; background-color: var(--grey); opacity: 0.5; }
+
+/* --- Results & Loader --- */
+@keyframes fadeInSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animated-result { animation: fadeInSlideUp 0.6s ease-out forwards; }
+
+#loader-container { text-align: center; }
+.loader { border: 4px solid #f3f3f330; border-top: 4px solid var(--matrix-green); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 15px auto 10px; }
+.loader-text { font-size: 0.9em; color: var(--light-green); }
+
+.result-container { margin-top: 25px; border: 2px solid var(--matrix-green); padding: 20px; border-radius: 5px; }
+#photo-section { margin-bottom: 20px; text-align: center; }
+.nid-photo { max-width: 160px; border: 3px solid var(--matrix-green); padding: 5px; background: var(--black); }
+
+.result-item { display: flex; align-items: center; margin-bottom: 10px; }
+.result-item .key { flex-shrink: 0; min-width: 180px; }
+.result-item .value { word-break: break-all; }
+.copy-icon { cursor: pointer; margin-left: 15px; font-size: 1.2em; opacity: 0.6; transition: opacity 0.3s ease; }
+.copy-icon:hover { opacity: 1; }
+
+.error-message { background-color: rgba(255, 95, 86, 0.1); border: 1px solid var(--red); padding: 15px; border-radius: 4px; margin-top: 20px; }
+
+/* --- Font Clarity & Glow Enhancement --- */
+label, .execute-button, .clear-button, .result-item .key, .result-item .value, .error-message {
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+    letter-spacing: 0.5px;
+}
+.result-item .name { text-shadow: 0 0 8px rgba(0, 255, 65, 0.5); }
+.footer { text-align: center; padding: 15px; font-size: 0.9em; color: var(--grey); }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 500px) {
+    body { font-size: 16px; }
+    .terminal-body { padding: 15px; }
+    .form-buttons { flex-direction: column; }
+    .result-item { flex-direction: column; align-items: flex-start; margin-bottom: 15px; }
+    .result-item .key { min-width: auto; margin-bottom: 5px; }
+    .copy-icon { margin-left: 0; margin-top: 5px; }
+}
+  
