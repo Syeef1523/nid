@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODECRAFTER - NID Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="scanline"></div>
+        <div class="header-title">
+            <a href="https://t.me/your_telegram_channel_or_user" target="_blank" class="telegram-link">CODECRAFTER</a>
+        </div>
+
+                <div class="main-content">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="button red"></span>
+                    <span class="button yellow"></span>
+                    <span class="button green"></span>
+                </div>
+                <div class="terminal-title" id="terminal-title-text"></div>
+            </div>
+            <div class="terminal-body">
+                <form id="nid-form">
+                    <div class="form-group">
+                        <label for="nid">
+                            <span class="prompt">></span> TARGET NID NUMBER
+                        </label>
+                        <input type="text" id="nid" name="nid" required autocomplete="off" placeholder="Enter 10, 13, or 17 digit NID">
+                        <span id="nid-validation-msg" class="validation-msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">
+                             <span class="prompt">></span> DATE OF BIRTH
+                        </label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="execute-button" id="execute-btn">EXECUTE QUERY</button>
+                        <button type="button" class="clear-button" id="clear-btn">CLEAR</button>
+                    </div>
+                </form>
+                 <div id="loader-container" style="display: none;">
+                    <div id="loader" class="loader"></div>
+                    <p id="loader-text" class="loader-text"></p>
+                 </div>
+                <div id="result-container" class="result-container" style="display: none;">
+                    <div id="photo-section"></div>
+                    <div id="result-data"></div>
+                </div>
+                 <div id="error-message" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 CODECRAFTER. All Rights Reserved.</p>
+        </div>
+    </div>
+    <script src="assets/main.js"></script>
+</body>
+  </html>
+                          
